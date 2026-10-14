@@ -69,19 +69,19 @@ POST /api/auth/login
 Content-Type: application/json
 
 {
-  "username": "caja",
+  "username": "eric",
   "password": "1234"
 }
 ```
 
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "token": "token info...",
   "expiresAt": "2026-10-15T08:00:00Z",
   "user": {
     "id": 1,
-    "username": "caja",
-    "role": "caja"
+    "username": "eric",
+    "role": "role caja ?? camarero"
   }
 }
 ```
@@ -102,9 +102,9 @@ Authorization: Bearer <token de un usuario caja>
 Content-Type: application/json
 
 {
-  "username": "camarero2",
+  "username": "eric2",
   "password": "1234",
-  "role": "camarero"
+  "role": "role caja ?? camarero "
 }
 ```
 
