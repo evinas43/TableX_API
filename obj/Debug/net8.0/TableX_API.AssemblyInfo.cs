@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TableX_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+630aa84c91f64f7514f61d2c23b8c6957520838a")]
 [assembly: System.Reflection.AssemblyProductAttribute("TableX_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TableX_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
