@@ -51,4 +51,15 @@ public class UserController : ControllerBase
         var user = await _userService.CreateAsync(request, User, ct);
         return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
     }
+
+    // DELETE api/users/5
+    [Authorize(Roles = Roles.Caja)]
+    [HttpDelete("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Delete(int id, CancellationToken ct)
+    {
+        await _userService.DeleteAsync(id, ct);
+        return NoContent();
+    }
 }
