@@ -66,4 +66,13 @@ public class UserService
             return user.ToDto();
         }, IsolationLevel.Serializable, ct);
     }
+
+    public async Task DeleteAsync(int id, CancellationToken ct = default)
+    {
+        var user = await _db.Users.FirstOrDefaultAsync(u => u.id == id, ct)
+            ?? throw new NotFoundException(ErrorMessages.UserNotFound);
+
+        _db.Users.Remove(user);
+        await _db.SaveChangesAsync(ct);
+    }
 }
