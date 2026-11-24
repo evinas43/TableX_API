@@ -52,6 +52,18 @@ public class UserController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
     }
 
+    // PUT api/users/5
+    [Authorize(Roles = Roles.Caja)]
+    [HttpPut("{id:int}")]
+    [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiError), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ApiError), StatusCodes.Status409Conflict)]
+    public async Task<ActionResult<UserDto>> Update(int id, [FromBody] UpdateUserRequest request, CancellationToken ct)
+    {
+        return Ok(await _userService.UpdateAsync(id, request, ct));
+    }
+
     // DELETE api/users/5
     [Authorize(Roles = Roles.Caja)]
     [HttpDelete("{id:int}")]

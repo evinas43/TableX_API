@@ -67,6 +67,25 @@ public class UserService
         }, IsolationLevel.Serializable, ct);
     }
 
+    public async Task<UserDto> UpdateAsync(int id, UpdateUserRequest request, CancellationToken ct = default)
+    {
+        var user = await _db.Users.FirstOrDefaultAsync(u => u.id == id, ct)
+            ?? throw new NotFoundException(ErrorMessages.UserNotFound);
+
+        if (await _db.Users.AnyAsync(u => u.username == request.Username && u.id != id, ct))
+            throw new ConflictException(ErrorMessages.UsernameAlreadyExists);
+
+        user.username = request.Username;
+        user.role = request.Role;
+
+        if (!string.IsNullOrEmpty(request.Password))
+            user.password = BCrypt.Net.BCrypt.HashPassword(request.Password);
+
+        await _db.SaveChangesAsync(ct);
+
+        return user.ToDto();
+    }
+
     public async Task DeleteAsync(int id, CancellationToken ct = default)
     {
         var user = await _db.Users.FirstOrDefaultAsync(u => u.id == id, ct)
